@@ -1,0 +1,285 @@
+[settings]
+screenchange-reload = true
+
+[colors]
+main-bg = #00000000
+main-fg = #ffffff
+
+[bar/mini]
+tray-transparent = false
+tray-position = right
+monitor = VGA-0
+monitor-fallback = eDP1
+width = 100%
+padding-left = 2
+padding-right = 2
+height = 45
+bottom = true
+radius = 5
+fixed-center = true
+line-size = 0
+border-top-size = 0
+border-bottom-size = 0
+border-left-size = 0
+border-right-size = 0
+wm-restack = bspwm
+module-margin-left = 0
+background = ${colors.main-bg}
+foreground = ${colors.main-fg}
+border-left-color = #817F7F
+border-top-color = #817F7F
+border-bottom-color = #817F7F
+border-right-color = #817F7F
+enable-ipc = true
+modules-center = bspwm
+modules-left = download upload separator1 spotify trash
+modules-right = ping filesystem memory pulseaudio separator datetime
+
+font-0 = "CaskaydiaCove Nerd Font:size=10:style=Regular;2"
+font-1 = "CaskaydiaCove Nerd Font:size=10:style=Regular;1"
+font-2 = "CaskaydiaCove Nerd Font:size=10:style=Regular;1"
+
+## ==== BASEMODULE ====
+[module/basemodule]
+interval = 1
+format = <label>
+label-font = 1
+label-padding = 1
+label-background = ${colors.main-bg}
+label-foreground = ${colors.main-fg}
+format-overline = ${colors.main-bg}
+format-underline = ${colors.main-bg}
+
+[module/spotify]
+type = custom/script
+tail = true
+format-prefix = "  "
+format-prefix-foreground = #686868
+format = <label>
+exec = ~/.config/polybar/scripts/scroll_spotify_status.sh
+
+[module/separator]
+type = custom/text
+content = " "
+content-padding = 4
+
+[module/separator1]
+type = custom/text
+content = " "
+content-padding = 3
+
+
+[module/memory]
+inherit = module/basemodule
+type = internal/memory
+label = %percentage_free%%
+format-prefix = ""
+format-prefix-padding = 1
+format-prefix-font = 5
+format-prefix-foreground = #686868
+format-prefix-underline = #E86862
+
+
+[module/checkupdates]
+inherit = module/basemodule
+type = custom/script
+exec = ~/.config/polybar/scripts/checkupdates.sh
+interval = 120
+format-prefix = 
+format-prefix-padding = 1
+format-prefix-font = 5
+format-prefix-foreground = #1793D1
+format-prefix-underline = #1793D1
+label = "%output%"
+
+[module/trash]
+inherit = module/basemodule
+type = custom/script
+exec = ~/.config/polybar/scripts/trash.sh
+click-left = ~/.config/polybar/scripts/trash.sh --clean &
+interval = 5
+format-prefix = ""
+format-prefix-padding = 1
+format-prefix-font = 5
+format-prefix-foreground = ${colors.main-fg}
+format-prefix-underline = #008B40
+label = %output:2%
+
+[module/newsboat]
+inherit = module/basemodule
+type = custom/script
+exec = newsboat -x reload; newsboat -x print-unread | awk '{ print $1 }'
+interval = 43200
+format-prefix = 
+format-prefix-padding = 1
+format-prefix-font = 5
+format-prefix-foreground = #EA6221
+format-prefix-underline = #EA6221
+label = "%output%"
+
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+label-layout-icon-font =
+label-layout = %icon%
+label-layout-padding = 1
+label-layout-background = #bc99ed
+label-layout-foreground = #000
+layout-icon-0 = ru;RU
+layout-icon-1 = us;US
+format = <label-layout>
+format-prefix-font = 2
+format-prefix-foreground = ${colors.format-prefix-fg}
+format-prefix-background = ${colors.format-prefix-bg}
+format-overline = #000000
+format-underline = #000000
+format-prefix-padding = 1
+
+[module/cpu]
+inherit = module/basemodule
+type = internal/cpu
+format-prefix = ""
+format-prefix-padding = 1
+format-prefix-font = 5
+format-prefix-foreground = #83A598
+format-prefix-underline = #83A598
+label = %percentage:2%%
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+mount-0 = /
+format-mounted-prefix = ""
+label-mounted-padding = 1
+label-mounted-font = 1
+label-mounted = "%percentage_free:2%%"
+format-mounted-prefix-font = 5
+format-mounted-prefix-padding = 1
+format-mounted-prefix-underline = #818181
+format-mounted-prefix-background = ${colors.format-prefix-bg}
+format-mounted-prefix-foreground = #686868
+label-mounted-background = ${colors.label-background}
+label-mounted-foreground = ${colors.label-foreground}
+
+[module/date]
+inherit = module/basemodule
+type = internal/date
+date = %R:%S
+label = %date%
+format-prefix-background = #817F7F
+label-background = #817F7F
+label-foreground = #050505
+format-prefix-font = 10
+format-prefix-foreground = #050505
+format-prefix-padding-left = 1
+format-prefix-underline = #458588
+label-underline = #817F7F
+
+[module/datetime]
+inherit = module/basemodule
+type = internal/date
+date = %a %b %d %R:%S %p
+label = %date%
+label-padding-right = 1
+format-prefix = " "
+format-prefix-font = 2
+format-prefix-padding-right = 1
+format-prefix-padding-left = 2
+format-prefix-background = ${colors.main-bg}
+format-prefix-foreground = #686868
+
+
+[module/pulseaudio]
+inherit = module/basemodule
+type = custom/script
+exec = pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \\([0-9][0-9]*\\)%.*,\\1,'
+label = "%output:2%%"
+format-prefix = 墳
+format-prefix-font = 5
+format-prefix-padding = 1
+format-prefix-foreground = #686868
+format-prefix-underline = #D3869B
+
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = false
+enable-click = true
+fuzzy-match = true
+enable-scroll = false
+format-overline = ${colors.main-bg}
+format-underline = ${colors.main-bg}
+label-focused-background = ${colors.main-bg}
+label-occupied-background = ${colors.main-bg}
+label-urgent-background = ${colors.main-bg}
+label-empty-background = ${colors.main-bg}
+label-focused-font = 1
+label-occupied-font = 1
+label-urgent-font = 1
+label-empty-font = 1
+label-focused = ﱢ
+label-focused-foreground = #665B6D9
+label-focused-padding = 1
+label-occupied = ﱢ
+label-occupied-foreground = #665B6D9
+label-occupied-padding = 1
+label-urgent = ﱢ
+label-urgent-foreground = #F00
+label-urgent-padding = 1
+label-empty = ﱢ
+label-empty-foreground = #817F7F
+label-empty-padding = 1
+
+[module/download]
+type = internal/network
+interface = wlan0
+interval = 0.5
+accumulate-stats = true
+format-connected-prefix = ﰭ
+format-connected-prefix-font = 1
+format-connected-prefix-padding-right = 1
+format-connected-prefix-foreground = #686868
+label-connected-padding = 1
+label-connected-font = 1
+label-connected = "%downspeed:8%"
+label-connected-foreground = ${colors.main-fg}
+
+[module/upload]
+type = internal/network
+interface = wlan0
+interval = 0.5
+accumulate-stats = true
+format-connected-prefix = ﰶ
+format-connected-prefix-font = 1
+format-connected-prefix-padding-right = 1
+format-connected-prefix-padding-left = 2
+format-connected-prefix-foreground = #686868
+label-connected-padding = 1
+label-connected-font = 1
+label-connected-foreground = ${colors.main-fg}
+label-connected = %upspeed:8%
+format-margin-left = 5
+
+[module/ping]
+type = custom/script
+exec = ~/.config/polybar/scripts/ping.sh
+format-prefix-foreground = ${colors.main-fg}
+format-prefix =  
+format-prefix-padding = 1
+label = %output:6%
+label-font = 1
+label-padding = 1
+format-prefix-font = 1
+
+
+[module/weather]
+type = custom/script
+exec = ~/.config/polybar/scripts/weather
+exec-if = ping openweathermap.org -c 1
+interval = 600
+label-font = 1
+label-foreground = ${colors.main-fg}
+format-prefix = ""
+format-prefix-foreground = #1793D1
+format-prefix-padding = 1
+format-prefix-font = 3

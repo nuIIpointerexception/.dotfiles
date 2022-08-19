@@ -1,0 +1,6 @@
+[Default Applications]
+text/plain=userapp-lite-PFXSQ1.desktop
+
+[Added Associations]
+text/plain=userapp-lite-PFXSQ1.desktop;
+application/xml=userapp-lite-PFXSQ1.desktop;

@@ -1,0 +1,125 @@
+* {
+  black:      #000000;
+  red:        #eb6e67;
+  green:      #95ee8f;
+  yellow:     #f8c456;
+  blue:       #6eaafb;
+  mangenta:   #d886f3;
+  purple:     #d886f3;
+  cyan:       #6cdcf7;
+  emphasis:   #50536b;
+  text:       #dfdfdf;
+  fg:         #000000;
+  bg:         #000000;
+
+  spacing: 1;
+  background-color: #22000000;
+  opacity: 50%;
+  font: "mononoki Nerd Font 12";
+  text-color: @text;
+}
+
+configuration {
+  show-icons: true;
+  icon-theme: "McMojave-circle-black-dark";
+}
+
+element-icon {
+    size:                           15;
+    border: 0px;
+    padding: 0 5px;
+    background-color: #00000000;
+}
+
+element-icon selected {
+  background-color: #00000000;
+}
+
+window {
+  fullscreen: false;
+  width: 1225;
+  height: 330;
+  y-offset: 0;
+  border: 0px;
+  border-color: #ffffff;
+}
+
+mainbox {
+  padding: 2% 2%;
+}
+
+inputbar {
+  margin: 0px 0px 20px 0px;
+  children: [prompt, textbox-prompt-colon, entry];
+}
+
+prompt {
+  text-color: #000000;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+textbox-prompt-colon {
+  expand: false;
+  str: "";
+  text-color: @text;
+  background-color: #262423;
+}
+
+entry {
+    blink: false;
+    padding: 15px;
+    placeholder: "Search";
+    background-color: #30000000;
+    border-radius: 0 5px 5px 0px;
+    color: #ffffff;
+}
+
+listview {
+  lines: 4;
+	columns: 3;
+  spacing: 5px;
+  dynamic: true;
+  scrollbar: false;
+}
+
+element {
+  padding: 10px;
+  text-color: @text;
+  highlight: bold #262423; /* green */
+  border-radius: 0px;
+}
+
+element-text {
+    background-color: 				inherit;
+	  expand:                         true;
+}
+
+element selected {
+  background-color: #222222;
+  text-color: #ffffff;
+  border-radius: 5px;
+}
+
+element urgent, element selected urgent {
+  text-color: @red;
+}
+
+element active, element selected active {
+  text-color: @purple;
+}
+
+message {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  border: 1px;
+  border-color: @cyan;
+}
+
+button selected {
+  padding: 5px;
+  border-radius: 0px;
+  background-color: #222222;
+}

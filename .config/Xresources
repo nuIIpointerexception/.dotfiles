@@ -1,0 +1,46 @@
+! hard contrast: *background: #000000
+*background: #1d2021
+! soft contrast: *background: #32302f
+*foreground: #ebdbb2
+! Black + DarkGrey
+*color0:  #282828
+*color8:  #928374
+! DarkRed + Red
+*color1:  #cc241d
+*color9:  #fb4934
+! DarkGreen + Green
+*color2:  #98971a
+*color10: #b8bb26
+! DarkYellow + Yellow
+*color3:  #d79921
+*color11: #fabd2f
+! DarkBlue + Blue
+*color4:  #458588
+*color12: #83a598
+! DarkMagenta + Magenta
+*color5:  #b16286
+*color13: #d3869b
+! DarkCyan + Cyan
+*color6:  #689d6a
+*color14: #8ec07c
+! LightGrey + White
+*color7:  #a89984
+*color15: #ebdbb2
+
+Xft.dpi: 75
+
+! Xclock colors.
+XClock*foreground: #e4e8ec
+XClock*background: #19191e
+XClock*majorColor:  rgba:e4/e8/ec/ff
+XClock*minorColor:  rgba:e4/e8/ec/ff
+XClock*hourColor:   rgba:e4/e8/ec/ff
+XClock*minuteColor: rgba:e4/e8/ec/ff
+XClock*secondColor: rgba:e4/e8/ec/ff
+
+! Set depth to make transparency work.
+URxvt*depth: 32
+
+Sxiv*background: #111111
+Sxiv*foreground: #817f7f
+Sxiv.font: CaskaydiaCove Nerd Font:size=11
